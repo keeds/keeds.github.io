@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>keeds.random</title>
+    <description>Just a random collection about random stuff I stumble across that I find interesting.</description>
+    <link></link>
+    <atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
+    
+      <item>
+        <title>first light</title>
+        <description>&lt;p&gt;Thought it was about time to put some thoughts, experiments and experience down in writing. I have no expectation that any of this will be revelatory to anybody. If it proves helpful to anybody at all then great. If it enables me to learn anything then brilliant.&lt;/p&gt;
+</description>
+        <pubDate>Thu, 08 May 2014 22:35:51 +0100</pubDate>
+        <link>/blog/2014/05/08/first-light.html</link>
+        <guid isPermaLink="true">/blog/2014/05/08/first-light.html</guid>
+      </item>
+    
+  </channel>
+</rss>
