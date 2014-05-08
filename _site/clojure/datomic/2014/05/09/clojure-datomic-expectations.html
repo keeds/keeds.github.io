@@ -4,10 +4,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>random</title>
+    <title>datomic, functions and expectations</title>
     <meta name="viewport" content="width=device-width">
     <meta name="description" content="Just a random collection about random stuff I stumble across that I find interesting.">
-    <link rel="canonical" href="/about/">
+    <link rel="canonical" href="/clojure/datomic/2014/05/09/clojure-datomic-expectations.html">
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/main.css">
@@ -56,11 +56,41 @@
       <div class="post">
 
   <header class="post-header">
-    <h1>random</h1>
+    <h1>datomic, functions and expectations</h1>
+    <p class="meta">May 9, 2014</p>
   </header>
 
   <article class="post-content">
-  <p>Just a random collection about random stuff I stumble across that I find interesting.</p>
+  <p>Bare in mind the usual disclaimer that none of this is revelatory. Just a dump of what I’ve done in the hope that it helps me make sense of it.</p>
+
+<p>Anyway… Clojure, Datomic and Testing. It’s always (for me) been hard to test SQL database schemas and functions. One of the features about Datomic is that it separates (decomplects?) the query handling and the transaction handling from each other and the underlying datastore. This means you can use a variety of types datastores and change as needs arises. It also allows for an in memory database which is ideal for testing.</p>
+
+<p>We generally use Expectations for our test framework. It’s small and simple. Anyway to test the schema and any database functions you can do this.</p>
+
+<div class="highlight"><pre><code class="clojure"><span class="p">(</span><span class="k">def </span><span class="nv">db-uri</span> <span class="s">&quot;datomic:mem://db&quot;</span><span class="p">)</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">setup</span>
+  <span class="p">{</span><span class="ss">:expectations-options</span> <span class="ss">:before-run</span><span class="p">}</span>
+  <span class="p">[]</span>
+  <span class="p">(</span><span class="nf">drop-database!</span> <span class="nv">db-uri</span><span class="p">)</span>
+  <span class="p">(</span><span class="nf">db-init</span> <span class="nv">db-uri</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">db</span> <span class="p">(</span><span class="nf">d/db</span> <span class="p">(</span><span class="nf">d/connect</span> <span class="nv">db-uri</span><span class="p">))]</span>
+    <span class="p">(</span><span class="k">def </span><span class="nv">test-db</span>  <span class="nv">db</span><span class="p">)</span>
+    <span class="p">(</span><span class="k">def </span><span class="nv">func1</span> <span class="p">(</span><span class="nb">-&gt; </span><span class="p">(</span><span class="nf">d/entity</span> <span class="nv">db</span> <span class="ss">:func1</span><span class="p">)</span> <span class="ss">:db/fn</span><span class="p">))</span>
+    <span class="p">(</span><span class="k">def </span><span class="nv">func2</span> <span class="p">(</span><span class="nb">-&gt; </span><span class="p">(</span><span class="nf">d/entity</span> <span class="nv">db</span> <span class="ss">:func2</span><span class="p">)</span> <span class="ss">:db/fn</span><span class="p">))))</span></code></pre></div>
+
+<p>(setup) with the :expectations-options metadata is a function that is run every time expectations loads the namespace.</p>
+
+<p>(db-init …) simply does a create-database, transacts the schema, transacts the database functions. All this done in the mearest of moments in memory. </p>
+
+<p>The test-db var gives you access to an initialised database that combined with the datomic (with) function and the :db-after returned value allows you test whatever transactions and database functions without having to pull down and recreate a database.</p>
+
+<p>The func1, func2 vars enable you to directly call your stored datomic database functions in your code. They might be simple validation functions that check the input and return it or an Exception if invalid. They might create transaction data for consistent entities. You can test the transaction data without transacting it. It’s just data. Or you can test the result of the transaction using the returned :tempids to query the entity that should have been created.</p>
+
+<div class="highlight"><pre><code class="clojure"><span class="p">(</span><span class="nf">expect</span> <span class="nv">RuntimeException</span> <span class="p">(</span><span class="nf">func1</span> <span class="p">{}))</span>
+<span class="p">(</span><span class="nf">expect</span> <span class="p">{</span><span class="ss">:book/title</span> <span class="s">&quot;Clojure rocks&quot;</span><span class="p">}</span> <span class="p">(</span><span class="nf">func1</span> <span class="p">{</span><span class="ss">:book/title</span> <span class="s">&quot;Clojure rocks&quot;</span><span class="p">}))</span></code></pre></div>
+
+<p>So combine this with lein autoexpect you are all set to TDD (if that’s your bag) your schema and database functions to your hearts content.</p>
 
   </article>
 
