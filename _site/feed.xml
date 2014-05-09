@@ -10,9 +10,11 @@
         <title>datomic, functions and expectations</title>
         <description>&lt;p&gt;Bare in mind the usual disclaimer that none of this is revelatory. Just a dump of what I’ve done in the hope that it helps me make sense of it.&lt;/p&gt;
 
-&lt;p&gt;Anyway… Clojure, Datomic and Testing. It’s always (for me) been hard to test SQL database schemas and functions. One of the features about Datomic is that it separates (decomplects?) the query handling and the transaction handling from each other and the underlying datastore. This means you can use a variety of types datastores and change as needs arises. It also allows for an in memory database which is ideal for testing.&lt;/p&gt;
+&lt;p&gt;This post was prompted by Tim Crayford’s post &lt;a href=&quot;http://yellerapp.com/posts/2014-05-07-testing-datomic.html&quot;&gt;Testing Against Datomic&lt;/a&gt;. Although I can imagine that most people using Datomic would do such a thing, there does not appear to be much content around about how? So here’s my two-penneth.&lt;/p&gt;
 
-&lt;p&gt;We generally use Expectations for our test framework. It’s small and simple. Anyway to test the schema and any database functions you can do this.&lt;/p&gt;
+&lt;p&gt;Anyway… &lt;a href=&quot;http://clojure.org/&quot;&gt;Clojure&lt;/a&gt;, &lt;a href=&quot;http://www.datomic.com/&quot;&gt;Datomic&lt;/a&gt; and testing. It’s always (for me) been hard to test SQL database schemas and functions. One of the features about Datomic is that it separates (decomplects?) the query handling and the transaction handling from each other and the underlying datastore. This means you can use a variety of types datastores and change as needs arises. It also allows for an in memory database which is ideal for testing.&lt;/p&gt;
+
+&lt;p&gt;We generally use &lt;a href=&quot;http://jayfields.com/expectations/&quot;&gt;Expectations&lt;/a&gt; for our test framework. It’s small and simple. Anyway to test the schema and any database functions you can do this.&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;clojure&quot;&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;def &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;db-uri&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;datomic:mem://db&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
@@ -37,7 +39,7 @@
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;clojure&quot;&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;expect&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;RuntimeException&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;func1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}))&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;expect&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:book/title&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;Clojure rocks&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;func1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:book/title&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;Clojure rocks&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;So combine this with lein autoexpect you are all set to TDD (if that’s your bag) your schema and database functions to your hearts content.&lt;/p&gt;
+&lt;p&gt;So combine this with &lt;a href=&quot;https://github.com/jakemcc/lein-autoexpect&quot;&gt;lein autoexpect&lt;/a&gt; you are all set to TDD (if that’s your bag) your schema and database functions to your hearts content.&lt;/p&gt;
 </description>
         <pubDate>Fri, 09 May 2014 00:00:00 +0100</pubDate>
         <link>/clojure/datomic/2014/05/09/clojure-datomic-expectations.html</link>

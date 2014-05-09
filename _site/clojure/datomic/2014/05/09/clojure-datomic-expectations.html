@@ -63,9 +63,11 @@
   <article class="post-content">
   <p>Bare in mind the usual disclaimer that none of this is revelatory. Just a dump of what I’ve done in the hope that it helps me make sense of it.</p>
 
-<p>Anyway… Clojure, Datomic and Testing. It’s always (for me) been hard to test SQL database schemas and functions. One of the features about Datomic is that it separates (decomplects?) the query handling and the transaction handling from each other and the underlying datastore. This means you can use a variety of types datastores and change as needs arises. It also allows for an in memory database which is ideal for testing.</p>
+<p>This post was prompted by Tim Crayford’s post <a href="http://yellerapp.com/posts/2014-05-07-testing-datomic.html">Testing Against Datomic</a>. Although I can imagine that most people using Datomic would do such a thing, there does not appear to be much content around about how? So here’s my two-penneth.</p>
 
-<p>We generally use Expectations for our test framework. It’s small and simple. Anyway to test the schema and any database functions you can do this.</p>
+<p>Anyway… <a href="http://clojure.org/">Clojure</a>, <a href="http://www.datomic.com/">Datomic</a> and testing. It’s always (for me) been hard to test SQL database schemas and functions. One of the features about Datomic is that it separates (decomplects?) the query handling and the transaction handling from each other and the underlying datastore. This means you can use a variety of types datastores and change as needs arises. It also allows for an in memory database which is ideal for testing.</p>
+
+<p>We generally use <a href="http://jayfields.com/expectations/">Expectations</a> for our test framework. It’s small and simple. Anyway to test the schema and any database functions you can do this.</p>
 
 <div class="highlight"><pre><code class="clojure"><span class="p">(</span><span class="k">def </span><span class="nv">db-uri</span> <span class="s">&quot;datomic:mem://db&quot;</span><span class="p">)</span>
 
@@ -90,7 +92,7 @@
 <div class="highlight"><pre><code class="clojure"><span class="p">(</span><span class="nf">expect</span> <span class="nv">RuntimeException</span> <span class="p">(</span><span class="nf">func1</span> <span class="p">{}))</span>
 <span class="p">(</span><span class="nf">expect</span> <span class="p">{</span><span class="ss">:book/title</span> <span class="s">&quot;Clojure rocks&quot;</span><span class="p">}</span> <span class="p">(</span><span class="nf">func1</span> <span class="p">{</span><span class="ss">:book/title</span> <span class="s">&quot;Clojure rocks&quot;</span><span class="p">}))</span></code></pre></div>
 
-<p>So combine this with lein autoexpect you are all set to TDD (if that’s your bag) your schema and database functions to your hearts content.</p>
+<p>So combine this with <a href="https://github.com/jakemcc/lein-autoexpect">lein autoexpect</a> you are all set to TDD (if that’s your bag) your schema and database functions to your hearts content.</p>
 
   </article>
 
