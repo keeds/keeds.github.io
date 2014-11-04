@@ -1,0 +1,5 @@
+---
+title: hakyll
+---
+
+After working with [Clojure](http://clojure.org) for 4 years I thought I would have a toy with [Haskell](http://haskell.org) in an attempt to improve my "functional" knowledge. Thought it would be an idea to "dog food" the blog to get some working knowledge with it so this is no generated with [hakyll](http://jaspervdj.be/hakyll/).
