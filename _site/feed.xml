@@ -7,6 +7,81 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
     
       <item>
+        <title>#crossisboss</title>
+        <description>&lt;p&gt;So, we are a few days passed the end of the 17/18 cyclo cross season (for the &lt;a href=&quot;http://www.easterncross.org.uk/index.htm&quot;&gt;east league&lt;/a&gt;) and starting to think about “what now?”. Rob Bates from &lt;a href=&quot;http://www.thepedalhouse.co.uk&quot;&gt;The Pedal House&lt;/a&gt; keeps asking a really good question: “What have your learnt?”. So lets start there.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;It’s flippin good fun&lt;/li&gt;
+  &lt;li&gt;I definately don’t go deep enough&lt;/li&gt;
+  &lt;li&gt;Technique needs improving&lt;/li&gt;
+  &lt;li&gt;Repeated accelerations are hard&lt;/li&gt;
+  &lt;li&gt;Beyond the basics, kit really doesn’t matter&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;its-flippin-good-fun&quot;&gt;It’s flippin good fun&lt;/h1&gt;
+&lt;p&gt;Remember when you were a kid and how much fun it was to be outside in all weathers, just running around like an idiot, not worrying about getting filthy dirty, having a ball… That’s cyclocross, just on a bike. It’s taken a long time to get around to trying it but I’m here now. The people are great. Shouting encouragement, sharing advice, kit, food and laughs. It’s a good craic.&lt;/p&gt;
+
+&lt;h1 id=&quot;i-definately-dont-go-deep-enough&quot;&gt;I definately don’t go deep enough&lt;/h1&gt;
+&lt;p&gt;I think I’m pushing, but I’m not really. I think I’m at my limit but I’m not really. Watching other’s who are actually giving it the beans, on the rivet, dropping the hammer, is pretty damn inspiring to watch. Especially when those doing it are youths/juniors/boys/girls giving it everything. Pretty damn inspiring is not really strong enough. Very humbling and Very inspiring. As a middle aged, more than slightly tubby grumpy old man I’ve been taught a very valuable lesson by all those young whipper snappers in the East League. Go hard or go home!&lt;/p&gt;
+
+&lt;h1 id=&quot;technique-needs-improving&quot;&gt;Technique needs improving&lt;/h1&gt;
+&lt;p&gt;So who knew? Just staying upright, getting off and on the bike, riding in mud/sand/snow, running/walking with a bike, jumping over stuff with bike. It’s hard work and it’s even harder to do quickly and smoothly. I’ve fallen off plenty, ridden off into the undergrowth in the opposite direction I was actually trying to go, jumped onto the nose of the saddle making me ride the remaining laps with it pointing straight down. Stumbled over hurdles, failed to remount, gouged my calves with pedals, and we won’t mention the crown jewels.&lt;/p&gt;
+
+&lt;h1 id=&quot;repeated-accelerations-are-hard&quot;&gt;Repeated accelerations are hard&lt;/h1&gt;
+&lt;p&gt;Watching other riders laying on the power at every opportunity and not being able to do the same hurts. Whether it hurts as much as actually doing it, or gaining the fitness required to be able do so to without going “pop”, probably not?&lt;/p&gt;
+
+&lt;h1 id=&quot;beyond-the-basics-kit-really-doesnt-matter&quot;&gt;Beyond the basics, kit really doesn’t matter&lt;/h1&gt;
+&lt;p&gt;So as a MAMIL this one hurts… Beyond a CX bike, with CX tyres and definately shoes that can take spikes I would say you are done. Nothing you add or lose is going to make as much difference to performance as some of those things listed above.&lt;/p&gt;
+
+&lt;h1 id=&quot;so-the-plan-for-this-coming-september&quot;&gt;So the plan for this coming September&lt;/h1&gt;
+&lt;p&gt;Have fun, go hard, get some technique and get some fitness!&lt;/p&gt;
+
+&lt;h1 id=&quot;me&quot;&gt;Me&lt;/h1&gt;
+&lt;p&gt;If you are at all interested, I placed a lowly 43rd in the Vets 40’s in my first season &lt;a href=&quot;http://www.easterncross.org.uk/placings17-18-e.htm&quot;&gt;results&lt;/a&gt;. I rode all the races in the season, DNF’ing only once in the last due to a front puncture.&lt;/p&gt;
+</description>
+        <pubDate>Wed, 31 Jan 2018 13:00:00 +0000</pubDate>
+        <link>/cyclocross/2018/01/31/crossisboss.html</link>
+        <guid isPermaLink="true">/cyclocross/2018/01/31/crossisboss.html</guid>
+      </item>
+    
+      <item>
+        <title>basic setup for cljs.test (updated)</title>
+        <description>&lt;p&gt;My previously documented setup for cljs.test no longer works correctly (as of r2814?) for reporting whether the tests passed or failed. To fix this you need to provide a custom reporter that somehow outputs the result for external processing. I’ve borrowed from examples by Antonin Hildebrand and Andrey Antukh on how you might do this using phantomjs. See &lt;a href=&quot;https://groups.google.com/d/msg/clojurescript/Bz3oq6ME95c/fZbndAVWiioJ&quot;&gt;thread&lt;/a&gt; for their comments and samples.&lt;/p&gt;
+
+&lt;p&gt;You can find the updated base setup here: &lt;a href=&quot;https://gitlab.com/keeds/cljsinit&quot;&gt;cljsinit&lt;/a&gt;. You can clone this and run using: lein cljsbuild auto test&lt;/p&gt;
+
+&lt;p&gt;The only changes are to the unit-test.js to retrieve the result outputted from the customer reporter. This is the other change which is in the test-runner namespace. See &lt;a href=&quot;https://gitlab.com/keeds/cljsinit/commit/65712dcc8f11a52d0a5aafff0d7fe81e45d0706d&quot;&gt;change&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The initial setup also uses a :notify-command on the :test cljs build configuration. This combined with “cljsbuild auto” auto runs the tests on every complile, which is great for a TDD approach. This does not help with CI setup as you need an exit-code for success/failure. To do this use :test-commands see &lt;a href=&quot;https://gitlab.com/keeds/cljsinit/blob/master/project.clj&quot;&gt;project.clj&lt;/a&gt; instead are run with “lein cljsbuild test”.&lt;/p&gt;
+</description>
+        <pubDate>Tue, 24 Mar 2015 23:00:00 +0000</pubDate>
+        <link>/clojurescript/2015/03/24/cljs-test-update.html</link>
+        <guid isPermaLink="true">/clojurescript/2015/03/24/cljs-test-update.html</guid>
+      </item>
+    
+      <item>
+        <title>basic setup for cljs.test</title>
+        <description>&lt;p&gt;&lt;a href=&quot;http://swannodette.github.io/&quot;&gt;David Nolen&lt;/a&gt; has recently released clojurescript 0.0-2496 with cljs.test included. Previously, I’ve never really got around to getting effective testing setup for clojurescript projects up and running so I thought I would take this as an opportunity to do so.&lt;/p&gt;
+
+&lt;p&gt;You can find a base setup here: &lt;a href=&quot;https://gitlab.com/keeds/cljsinit&quot;&gt;cljsinit&lt;/a&gt;. You can clone this and run using: lein cljsbuild auto test&lt;/p&gt;
+
+&lt;p&gt;In summary:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;You need leiningen, phantomjs (in your path)&lt;/li&gt;
+  &lt;li&gt;Setup a cljsbuild target for testing&lt;/li&gt;
+  &lt;li&gt;Use cljsbuild :notify-command to run phantomjs with a runner script (see phantom folder)&lt;/li&gt;
+  &lt;li&gt;Run using: lein cljsbuild auto test  (test is just the name of the build target)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I plan to make a lein template for this at some point.&lt;/p&gt;
+</description>
+        <pubDate>Fri, 19 Dec 2014 11:00:00 +0000</pubDate>
+        <link>/clojurescript/2014/12/19/cljs-test.html</link>
+        <guid isPermaLink="true">/clojurescript/2014/12/19/cljs-test.html</guid>
+      </item>
+    
+      <item>
         <title>datomic, functions and expectations</title>
         <description>&lt;p&gt;Bare in mind the usual disclaimer that none of this is revelatory. Just a dump of what I’ve done in the hope that it helps me make sense of it.&lt;/p&gt;
 
@@ -16,28 +91,28 @@
 
 &lt;p&gt;We generally use &lt;a href=&quot;http://jayfields.com/expectations/&quot;&gt;Expectations&lt;/a&gt; for our test framework. It’s small and simple. Anyway to test the schema and any database functions you can do this.&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;clojure&quot;&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;def &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;db-uri&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;datomic:mem://db&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-clojure&quot; data-lang=&quot;clojure&quot;&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;db-uri&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;datomic:mem://db&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 
-&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;defn &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;setup&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:expectations-options&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:before-run&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;drop-database!&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;db-uri&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;db-init&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;db-uri&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;let &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;db&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;d/db&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;d/connect&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;db-uri&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))]&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;def &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;test-db&lt;/span&gt;  &lt;span class=&quot;nv&quot;&gt;db&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;def &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;func1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;-&amp;gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;d/entity&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;db&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:func1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:db/fn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;def &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;func2&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;-&amp;gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;d/entity&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;db&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:func2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:db/fn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;defn&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;setup&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;:expectations-options&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;no&quot;&gt;:before-run&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;drop-database!&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;db-uri&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;db-init&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;db-uri&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;db&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;d/db&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;d/connect&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;db-uri&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;test-db&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;db&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;func1&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;d/entity&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;db&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;no&quot;&gt;:func1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;no&quot;&gt;:db/fn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;func2&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;d/entity&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;db&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;no&quot;&gt;:func2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;no&quot;&gt;:db/fn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;(setup) with the :expectations-options metadata is a function that is run every time expectations loads the namespace.&lt;/p&gt;
 
-&lt;p&gt;(db-init …) simply does a create-database, transacts the schema, transacts the database functions. All this done in the mearest of moments in memory. &lt;/p&gt;
+&lt;p&gt;(db-init …) simply does a create-database, transacts the schema, transacts the database functions. All this done in the mearest of moments in memory.&lt;/p&gt;
 
 &lt;p&gt;The test-db var gives you access to an initialised database that combined with the datomic (with) function and the :db-after returned value allows you test whatever transactions and database functions without having to pull down and recreate a database.&lt;/p&gt;
 
 &lt;p&gt;The func1, func2 vars enable you to directly call your stored datomic database functions in your code. They might be simple validation functions that check the input and return it or an Exception if invalid. They might create transaction data for consistent entities. You can test the transaction data without transacting it. It’s just data. Or you can test the result of the transaction using the returned :tempids to query the entity that should have been created.&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;clojure&quot;&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;expect&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;RuntimeException&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;func1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}))&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;expect&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:book/title&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;Clojure rocks&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;func1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:book/title&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;Clojure rocks&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-clojure&quot; data-lang=&quot;clojure&quot;&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;expect&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;RuntimeException&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;func1&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{}))&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;expect&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;:book/title&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Clojure rocks&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;func1&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;:book/title&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Clojure rocks&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;So combine this with &lt;a href=&quot;https://github.com/jakemcc/lein-autoexpect&quot;&gt;lein autoexpect&lt;/a&gt; you are all set to TDD (if that’s your bag) your schema and database functions to your hearts content.&lt;/p&gt;
 </description>

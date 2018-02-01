@@ -4,10 +4,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>datomic, functions and expectations</title>
+    <title>#crossisboss</title>
     <meta name="viewport" content="width=device-width">
     <meta name="description" content="Just a random collection about random stuff I stumble across that I find interesting.">
-    <link rel="canonical" href="/clojure/datomic/2014/05/09/clojure-datomic-expectations.html">
+    <link rel="canonical" href="/cyclocross/2018/01/31/crossisboss.html">
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/main.css">
@@ -56,45 +56,43 @@
       <div class="post">
 
   <header class="post-header">
-    <h1>datomic, functions and expectations</h1>
-    <p class="meta">May 9, 2014</p>
+    <h1>#crossisboss</h1>
+    <p class="meta">Jan 31, 2018</p>
   </header>
 
-  <div>clojure, datomic</div>
+  <div>cyclocross</div>
 
   <article class="post-content">
-  <p>Bare in mind the usual disclaimer that none of this is revelatory. Just a dump of what I’ve done in the hope that it helps me make sense of it.</p>
+  <p>So, we are a few days passed the end of the 17/18 cyclo cross season (for the <a href="http://www.easterncross.org.uk/index.htm">east league</a>) and starting to think about “what now?”. Rob Bates from <a href="http://www.thepedalhouse.co.uk">The Pedal House</a> keeps asking a really good question: “What have your learnt?”. So lets start there.</p>
 
-<p>This post was prompted by Tim Crayford’s post <a href="http://yellerapp.com/posts/2014-05-07-testing-datomic.html">Testing Against Datomic</a>. Although I can imagine that most people using Datomic would do such a thing, there does not appear to be much content around about how? So here’s my two-penneth.</p>
+<ul>
+  <li>It’s flippin good fun</li>
+  <li>I definately don’t go deep enough</li>
+  <li>Technique needs improving</li>
+  <li>Repeated accelerations are hard</li>
+  <li>Beyond the basics, kit really doesn’t matter</li>
+</ul>
 
-<p>Anyway… <a href="http://clojure.org/">Clojure</a>, <a href="http://www.datomic.com/">Datomic</a> and testing. It’s always (for me) been hard to test SQL database schemas and functions. One of the features about Datomic is that it separates (decomplects?) the query handling and the transaction handling from each other and the underlying datastore. This means you can use a variety of types datastores and change as needs arises. It also allows for an in memory database which is ideal for testing.</p>
+<h1 id="its-flippin-good-fun">It’s flippin good fun</h1>
+<p>Remember when you were a kid and how much fun it was to be outside in all weathers, just running around like an idiot, not worrying about getting filthy dirty, having a ball… That’s cyclocross, just on a bike. It’s taken a long time to get around to trying it but I’m here now. The people are great. Shouting encouragement, sharing advice, kit, food and laughs. It’s a good craic.</p>
 
-<p>We generally use <a href="http://jayfields.com/expectations/">Expectations</a> for our test framework. It’s small and simple. Anyway to test the schema and any database functions you can do this.</p>
+<h1 id="i-definately-dont-go-deep-enough">I definately don’t go deep enough</h1>
+<p>I think I’m pushing, but I’m not really. I think I’m at my limit but I’m not really. Watching other’s who are actually giving it the beans, on the rivet, dropping the hammer, is pretty damn inspiring to watch. Especially when those doing it are youths/juniors/boys/girls giving it everything. Pretty damn inspiring is not really strong enough. Very humbling and Very inspiring. As a middle aged, more than slightly tubby grumpy old man I’ve been taught a very valuable lesson by all those young whipper snappers in the East League. Go hard or go home!</p>
 
-<figure class="highlight"><pre><code class="language-clojure" data-lang="clojure"><span class="p">(</span><span class="k">def</span><span class="w"> </span><span class="n">db-uri</span><span class="w"> </span><span class="s">"datomic:mem://db"</span><span class="p">)</span><span class="w">
+<h1 id="technique-needs-improving">Technique needs improving</h1>
+<p>So who knew? Just staying upright, getting off and on the bike, riding in mud/sand/snow, running/walking with a bike, jumping over stuff with bike. It’s hard work and it’s even harder to do quickly and smoothly. I’ve fallen off plenty, ridden off into the undergrowth in the opposite direction I was actually trying to go, jumped onto the nose of the saddle making me ride the remaining laps with it pointing straight down. Stumbled over hurdles, failed to remount, gouged my calves with pedals, and we won’t mention the crown jewels.</p>
 
-</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">setup</span><span class="w">
-  </span><span class="p">{</span><span class="no">:expectations-options</span><span class="w"> </span><span class="no">:before-run</span><span class="p">}</span><span class="w">
-  </span><span class="p">[]</span><span class="w">
-  </span><span class="p">(</span><span class="nf">drop-database!</span><span class="w"> </span><span class="n">db-uri</span><span class="p">)</span><span class="w">
-  </span><span class="p">(</span><span class="nf">db-init</span><span class="w"> </span><span class="n">db-uri</span><span class="p">)</span><span class="w">
-  </span><span class="p">(</span><span class="k">let</span><span class="w"> </span><span class="p">[</span><span class="n">db</span><span class="w"> </span><span class="p">(</span><span class="nf">d/db</span><span class="w"> </span><span class="p">(</span><span class="nf">d/connect</span><span class="w"> </span><span class="n">db-uri</span><span class="p">))]</span><span class="w">
-    </span><span class="p">(</span><span class="k">def</span><span class="w"> </span><span class="n">test-db</span><span class="w">  </span><span class="n">db</span><span class="p">)</span><span class="w">
-    </span><span class="p">(</span><span class="k">def</span><span class="w"> </span><span class="n">func1</span><span class="w"> </span><span class="p">(</span><span class="nb">-&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">d/entity</span><span class="w"> </span><span class="n">db</span><span class="w"> </span><span class="no">:func1</span><span class="p">)</span><span class="w"> </span><span class="no">:db/fn</span><span class="p">))</span><span class="w">
-    </span><span class="p">(</span><span class="k">def</span><span class="w"> </span><span class="n">func2</span><span class="w"> </span><span class="p">(</span><span class="nb">-&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">d/entity</span><span class="w"> </span><span class="n">db</span><span class="w"> </span><span class="no">:func2</span><span class="p">)</span><span class="w"> </span><span class="no">:db/fn</span><span class="p">))))</span></code></pre></figure>
+<h1 id="repeated-accelerations-are-hard">Repeated accelerations are hard</h1>
+<p>Watching other riders laying on the power at every opportunity and not being able to do the same hurts. Whether it hurts as much as actually doing it, or gaining the fitness required to be able do so to without going “pop”, probably not?</p>
 
-<p>(setup) with the :expectations-options metadata is a function that is run every time expectations loads the namespace.</p>
+<h1 id="beyond-the-basics-kit-really-doesnt-matter">Beyond the basics, kit really doesn’t matter</h1>
+<p>So as a MAMIL this one hurts… Beyond a CX bike, with CX tyres and definately shoes that can take spikes I would say you are done. Nothing you add or lose is going to make as much difference to performance as some of those things listed above.</p>
 
-<p>(db-init …) simply does a create-database, transacts the schema, transacts the database functions. All this done in the mearest of moments in memory.</p>
+<h1 id="so-the-plan-for-this-coming-september">So the plan for this coming September</h1>
+<p>Have fun, go hard, get some technique and get some fitness!</p>
 
-<p>The test-db var gives you access to an initialised database that combined with the datomic (with) function and the :db-after returned value allows you test whatever transactions and database functions without having to pull down and recreate a database.</p>
-
-<p>The func1, func2 vars enable you to directly call your stored datomic database functions in your code. They might be simple validation functions that check the input and return it or an Exception if invalid. They might create transaction data for consistent entities. You can test the transaction data without transacting it. It’s just data. Or you can test the result of the transaction using the returned :tempids to query the entity that should have been created.</p>
-
-<figure class="highlight"><pre><code class="language-clojure" data-lang="clojure"><span class="p">(</span><span class="nf">expect</span><span class="w"> </span><span class="n">RuntimeException</span><span class="w"> </span><span class="p">(</span><span class="nf">func1</span><span class="w"> </span><span class="p">{}))</span><span class="w">
-</span><span class="p">(</span><span class="nf">expect</span><span class="w"> </span><span class="p">{</span><span class="no">:book/title</span><span class="w"> </span><span class="s">"Clojure rocks"</span><span class="p">}</span><span class="w"> </span><span class="p">(</span><span class="nf">func1</span><span class="w"> </span><span class="p">{</span><span class="no">:book/title</span><span class="w"> </span><span class="s">"Clojure rocks"</span><span class="p">}))</span></code></pre></figure>
-
-<p>So combine this with <a href="https://github.com/jakemcc/lein-autoexpect">lein autoexpect</a> you are all set to TDD (if that’s your bag) your schema and database functions to your hearts content.</p>
+<h1 id="me">Me</h1>
+<p>If you are at all interested, I placed a lowly 43rd in the Vets 40’s in my first season <a href="http://www.easterncross.org.uk/placings17-18-e.htm">results</a>. I rode all the races in the season, DNF’ing only once in the last due to a front puncture.</p>
 
   </article>
 

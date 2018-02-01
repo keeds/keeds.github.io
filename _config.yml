@@ -7,6 +7,8 @@ baseurl: ""
 url: "http://keeds.github.io"
 username: keeds
 twitteruser: apkeedle
+youtubeid: UCt6KbU3Uke42diVLhBzVCuw
+youtubename: "Andrew Keedle"
 
 # Build settings
 markdown: kramdown

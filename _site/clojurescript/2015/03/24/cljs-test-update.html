@@ -4,10 +4,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>datomic, functions and expectations</title>
+    <title>basic setup for cljs.test (updated)</title>
     <meta name="viewport" content="width=device-width">
     <meta name="description" content="Just a random collection about random stuff I stumble across that I find interesting.">
-    <link rel="canonical" href="/clojure/datomic/2014/05/09/clojure-datomic-expectations.html">
+    <link rel="canonical" href="/clojurescript/2015/03/24/cljs-test-update.html">
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/main.css">
@@ -56,45 +56,20 @@
       <div class="post">
 
   <header class="post-header">
-    <h1>datomic, functions and expectations</h1>
-    <p class="meta">May 9, 2014</p>
+    <h1>basic setup for cljs.test (updated)</h1>
+    <p class="meta">Mar 24, 2015</p>
   </header>
 
-  <div>clojure, datomic</div>
+  <div>clojurescript</div>
 
   <article class="post-content">
-  <p>Bare in mind the usual disclaimer that none of this is revelatory. Just a dump of what I’ve done in the hope that it helps me make sense of it.</p>
+  <p>My previously documented setup for cljs.test no longer works correctly (as of r2814?) for reporting whether the tests passed or failed. To fix this you need to provide a custom reporter that somehow outputs the result for external processing. I’ve borrowed from examples by Antonin Hildebrand and Andrey Antukh on how you might do this using phantomjs. See <a href="https://groups.google.com/d/msg/clojurescript/Bz3oq6ME95c/fZbndAVWiioJ">thread</a> for their comments and samples.</p>
 
-<p>This post was prompted by Tim Crayford’s post <a href="http://yellerapp.com/posts/2014-05-07-testing-datomic.html">Testing Against Datomic</a>. Although I can imagine that most people using Datomic would do such a thing, there does not appear to be much content around about how? So here’s my two-penneth.</p>
+<p>You can find the updated base setup here: <a href="https://gitlab.com/keeds/cljsinit">cljsinit</a>. You can clone this and run using: lein cljsbuild auto test</p>
 
-<p>Anyway… <a href="http://clojure.org/">Clojure</a>, <a href="http://www.datomic.com/">Datomic</a> and testing. It’s always (for me) been hard to test SQL database schemas and functions. One of the features about Datomic is that it separates (decomplects?) the query handling and the transaction handling from each other and the underlying datastore. This means you can use a variety of types datastores and change as needs arises. It also allows for an in memory database which is ideal for testing.</p>
+<p>The only changes are to the unit-test.js to retrieve the result outputted from the customer reporter. This is the other change which is in the test-runner namespace. See <a href="https://gitlab.com/keeds/cljsinit/commit/65712dcc8f11a52d0a5aafff0d7fe81e45d0706d">change</a>.</p>
 
-<p>We generally use <a href="http://jayfields.com/expectations/">Expectations</a> for our test framework. It’s small and simple. Anyway to test the schema and any database functions you can do this.</p>
-
-<figure class="highlight"><pre><code class="language-clojure" data-lang="clojure"><span class="p">(</span><span class="k">def</span><span class="w"> </span><span class="n">db-uri</span><span class="w"> </span><span class="s">"datomic:mem://db"</span><span class="p">)</span><span class="w">
-
-</span><span class="p">(</span><span class="k">defn</span><span class="w"> </span><span class="n">setup</span><span class="w">
-  </span><span class="p">{</span><span class="no">:expectations-options</span><span class="w"> </span><span class="no">:before-run</span><span class="p">}</span><span class="w">
-  </span><span class="p">[]</span><span class="w">
-  </span><span class="p">(</span><span class="nf">drop-database!</span><span class="w"> </span><span class="n">db-uri</span><span class="p">)</span><span class="w">
-  </span><span class="p">(</span><span class="nf">db-init</span><span class="w"> </span><span class="n">db-uri</span><span class="p">)</span><span class="w">
-  </span><span class="p">(</span><span class="k">let</span><span class="w"> </span><span class="p">[</span><span class="n">db</span><span class="w"> </span><span class="p">(</span><span class="nf">d/db</span><span class="w"> </span><span class="p">(</span><span class="nf">d/connect</span><span class="w"> </span><span class="n">db-uri</span><span class="p">))]</span><span class="w">
-    </span><span class="p">(</span><span class="k">def</span><span class="w"> </span><span class="n">test-db</span><span class="w">  </span><span class="n">db</span><span class="p">)</span><span class="w">
-    </span><span class="p">(</span><span class="k">def</span><span class="w"> </span><span class="n">func1</span><span class="w"> </span><span class="p">(</span><span class="nb">-&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">d/entity</span><span class="w"> </span><span class="n">db</span><span class="w"> </span><span class="no">:func1</span><span class="p">)</span><span class="w"> </span><span class="no">:db/fn</span><span class="p">))</span><span class="w">
-    </span><span class="p">(</span><span class="k">def</span><span class="w"> </span><span class="n">func2</span><span class="w"> </span><span class="p">(</span><span class="nb">-&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">d/entity</span><span class="w"> </span><span class="n">db</span><span class="w"> </span><span class="no">:func2</span><span class="p">)</span><span class="w"> </span><span class="no">:db/fn</span><span class="p">))))</span></code></pre></figure>
-
-<p>(setup) with the :expectations-options metadata is a function that is run every time expectations loads the namespace.</p>
-
-<p>(db-init …) simply does a create-database, transacts the schema, transacts the database functions. All this done in the mearest of moments in memory.</p>
-
-<p>The test-db var gives you access to an initialised database that combined with the datomic (with) function and the :db-after returned value allows you test whatever transactions and database functions without having to pull down and recreate a database.</p>
-
-<p>The func1, func2 vars enable you to directly call your stored datomic database functions in your code. They might be simple validation functions that check the input and return it or an Exception if invalid. They might create transaction data for consistent entities. You can test the transaction data without transacting it. It’s just data. Or you can test the result of the transaction using the returned :tempids to query the entity that should have been created.</p>
-
-<figure class="highlight"><pre><code class="language-clojure" data-lang="clojure"><span class="p">(</span><span class="nf">expect</span><span class="w"> </span><span class="n">RuntimeException</span><span class="w"> </span><span class="p">(</span><span class="nf">func1</span><span class="w"> </span><span class="p">{}))</span><span class="w">
-</span><span class="p">(</span><span class="nf">expect</span><span class="w"> </span><span class="p">{</span><span class="no">:book/title</span><span class="w"> </span><span class="s">"Clojure rocks"</span><span class="p">}</span><span class="w"> </span><span class="p">(</span><span class="nf">func1</span><span class="w"> </span><span class="p">{</span><span class="no">:book/title</span><span class="w"> </span><span class="s">"Clojure rocks"</span><span class="p">}))</span></code></pre></figure>
-
-<p>So combine this with <a href="https://github.com/jakemcc/lein-autoexpect">lein autoexpect</a> you are all set to TDD (if that’s your bag) your schema and database functions to your hearts content.</p>
+<p>The initial setup also uses a :notify-command on the :test cljs build configuration. This combined with “cljsbuild auto” auto runs the tests on every complile, which is great for a TDD approach. This does not help with CI setup as you need an exit-code for success/failure. To do this use :test-commands see <a href="https://gitlab.com/keeds/cljsinit/blob/master/project.clj">project.clj</a> instead are run with “lein cljsbuild test”.</p>
 
   </article>
 
