@@ -1,0 +1,38 @@
+---
+layout: post
+title:  "gas"
+date:   2018-02-05 00:00:00
+categories: [cycling, cyclocross]
+---
+
+# Gear Acquisition Syndrome (GAS)
+Whatever activity I partake of I alway suffer from GAS. Computing, Music, Photography, Oenology, Cycling, always got to have the best gear. I think the saying "All the gear, no idea" was coined after me.
+
+Anyway given the recent revelation (to me) that beyond the very basics, kit doesn't really make much difference for CX, lets actually get back to basics... Ok, when I say basics, lets not be ridiculous. I like the nice stuff. Lets just not buy any more and lets par down what we have.
+
+# Rules for 2018
+* One bike to rule them all
+* Forget about weight and thus GAS (apart from mine!)
+* Forget about power (meters)
+
+# Provisos
+* Keep the KICKR (obviously) for indoor training and KISS racing!
+* Extra set of disc wheels to swap from road/gravel and for spare next CX season
+
+# The Plan
+* Ride the Ridley (yes, I know it's not basic) for everything
+  * Road (if I ever actually get outside)
+  * Zwift racing (on the KICKR)
+  * Indoor training (on the KICKR)
+  * Road racing! Let the CX'ers take it to the Roadies this time... :-)
+* Switch to 50T/11-36T for the Summer (from 42T/11-32T)
+* Stick on some fat 28mm road rubber
+* Sell all the other stuff
+* I might even keep the egg beaters on :-)
+
+# Sticky points
+* Hopefully I don't miss the extra 2T up front for sprinting
+* Hopefully the gear spacing isn't tooooo terrible
+* Hopefully I don't get dropped during the Honnington race series on a Cross bike, with 1x and 28mm rubber. 
+
+Should be interesting. Wish me luck. :-)
